@@ -133,6 +133,154 @@
       .slide.active {
         display: block;
       }
+      @media (max-width: 900px) {
+        /* Switch to Vertical Layout */
+        body {
+          overflow: auto; /* Allow scrolling on mobile */
+        }
+        .container {
+          flex-direction: column;
+          height: auto;
+          min-height: 100vh;
+        }
+
+        /* Top Navigation Bar */
+        .sidebar {
+          width: 100%;
+          height: auto;
+          padding: 15px;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          position: sticky;
+          top: 0;
+          background: rgba(15, 17, 21, 0.95);
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          border-right: none;
+        }
+
+        .logo img {
+          width: 50px;
+          height: 50px;
+          padding: 5px;
+        }
+
+        .nav {
+          display: flex;
+          flex-direction: row;
+          overflow-x: auto;
+          gap: 15px;
+          padding-bottom: 5px;
+          margin-left: 20px;
+          -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+        }
+
+        /* Hide Scrollbar for Nav */
+        .nav::-webkit-scrollbar {
+          height: 4px;
+        }
+        .nav::-webkit-scrollbar-thumb {
+          background: var(--secondary);
+          border-radius: 4px;
+        }
+
+        .nav button {
+          width: auto;
+          white-space: nowrap;
+          padding: 8px 15px;
+          font-size: 13px;
+        }
+
+        .nav button:hover {
+          padding-left: 15px; /* Disable the desktop hover slide effect */
+        }
+
+        /* Adjust Slides Container */
+        .slides {
+          padding: 20px;
+          overflow: visible; /* Let body handle scrolling */
+          height: auto;
+        }
+
+        .slide {
+          padding-bottom: 40px;
+          min-height: auto !important; /* Override vertical centering height */
+        }
+
+        /* Typography Scaling */
+        h1 {
+          font-size: 36px !important; /* Force override inline styles */
+        }
+        h2 {
+          font-size: 18px;
+        }
+
+        /* Grid Adjustments */
+        .grid {
+          grid-template-columns: 1fr; /* Stack cards */
+        }
+
+        /* App Showcase (Phones) */
+        .app-showcase {
+          gap: 40px;
+          transform: scale(0.9);
+        }
+
+        /* Diagram Images */
+        .diagram-row img {
+          height: auto;
+          max-height: 300px;
+        }
+
+        /* Team Section */
+        .avatars {
+          gap: 20px;
+        }
+
+        /* Conclusion Section */
+        .conclusion-logo {
+          width: 120px;
+          height: 120px;
+          margin-top: 40px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .sidebar {
+          flex-direction: column;
+          gap: 10px;
+          position: relative; /* Unstick on small screens to save space */
+        }
+        .nav {
+          width: 100%;
+          margin-left: 0;
+          justify-content: flex-start;
+        }
+
+        h1 {
+          font-size: 28px !important;
+        }
+
+        /* Phone 3D Effect Reduced for Mobile */
+        .phone-wrap {
+          transform: perspective(1000px) rotateY(0deg); /* Flatten */
+          margin-bottom: 20px;
+        }
+        .phone-wrap:hover {
+          transform: scale(1.02);
+        }
+
+        .team-section {
+          gap: 20px;
+        }
+
+        /* Fix Center Alignments */
+        .slide > div[style] {
+          min-height: auto !important;
+          padding-top: 40px;
+        }
+      }
 
       @keyframes fadeUp {
         from {
