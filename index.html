@@ -384,8 +384,10 @@
 
       /* ====== DASHBOARD GALLERY ====== */
       .dashboard-gallery {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         gap: 20px;
         margin-top: 30px;
       }
@@ -430,6 +432,42 @@
         font-size: 14px;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
         padding-top: 20px;
+      }
+      .conclusion-logo {
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
+        border-radius: 50%;
+        border: 4px solid var(--secondary);
+        padding: 15px;
+        margin-bottom: 30px;
+        margin-top: 100px;
+
+        /* Glass shadow effect */
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2),
+          /* subtle highlight */ 0 8px 30px rgba(0, 0, 0, 0.15),
+          /* soft shadow */ 0 0 40px rgba(255, 255, 255, 0.1); /* soft glow */
+
+        backdrop-filter: blur(
+          8px
+        ); /* optional, if the logo is over a background */
+        animation: floatLogo 2s ease-in-out infinite alternate;
+        transition: box-shadow 0.3s ease;
+      }
+
+      /* Optional hover effect for more glass-like interaction */
+      .conclusion-logo:hover {
+        box-shadow: 0 6px 25px rgba(255, 255, 255, 0.3),
+          0 10px 40px rgba(0, 0, 0, 0.2), 0 0 50px rgba(255, 255, 255, 0.15);
+      }
+
+      @keyframes floatLogo {
+        0% {
+          transform: translateY(0px);
+        }
+        100% {
+          transform: translateY(-15px);
+        }
       }
     </style>
   </head>
@@ -629,6 +667,22 @@
               </div>
               <div class="phone-label">Chat System</div>
             </div>
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <span style="color: #555">[Event UI Image]</span>
+                </div>
+              </div>
+              <div class="phone-label">Event Screen</div>
+            </div>
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <span style="color: #555">[Post UI Image]</span>
+                </div>
+              </div>
+              <div class="phone-label">Post Screen</div>
+            </div>
           </div>
         </section>
 
@@ -707,6 +761,7 @@
               text-align: center;
             "
           >
+            <img src="./OurLogo.png" alt="JoMap Logo" class="conclusion-logo" />
             <h1>Thank You</h1>
             <p style="font-size: 24px">JoMap is ready to scale.</p>
             <h2 style="margin-top: 40px">Questions?</h2>
