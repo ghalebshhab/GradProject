@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <title>JoMap Project Presentation</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
@@ -27,6 +30,7 @@
       * {
         box-sizing: border-box;
         font-family: "Inter", sans-serif;
+        -webkit-tap-highlight-color: transparent; /* Removes blue highlight on tap */
       }
 
       body {
@@ -40,7 +44,7 @@
           ),
           linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         background-size: 50px 50px;
-        overflow: hidden;
+        overflow: hidden; /* Desktop default */
       }
 
       /* Layout */
@@ -58,8 +62,9 @@
         flex-direction: column;
         gap: 20px;
         border-right: 1px solid rgba(255, 255, 255, 0.05);
-        z-index: 10;
+        z-index: 100;
         box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+        flex-shrink: 0;
       }
 
       .logo {
@@ -96,6 +101,7 @@
         font-size: 14px;
         font-weight: 500;
         text-align: left;
+        width: 100%;
       }
 
       .nav button:hover {
@@ -120,6 +126,7 @@
         padding: 40px 60px;
         overflow-y: auto;
         scroll-behavior: smooth;
+        position: relative;
       }
 
       .slide {
@@ -133,165 +140,6 @@
       .slide.active {
         display: block;
       }
-      @media (max-width: 900px) {
-        /* Switch to Vertical Layout */
-        body {
-          overflow: auto; /* Allow scrolling on mobile */
-        }
-        .container {
-          flex-direction: column;
-          height: auto;
-          min-height: 100vh;
-        }
-
-        /* Top Navigation Bar */
-        .sidebar {
-          width: 100%;
-          height: auto;
-          padding: 15px;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-          position: sticky;
-          top: 0;
-          background: rgba(15, 17, 21, 0.95);
-          backdrop-filter: blur(10px);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-          border-right: none;
-        }
-
-        .logo img {
-          width: 50px;
-          height: 50px;
-          padding: 5px;
-        }
-
-        .nav {
-          display: flex;
-          flex-direction: row;
-          overflow-x: auto;
-          gap: 15px;
-          padding-bottom: 5px;
-          margin-left: 20px;
-          -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
-        }
-
-        /* Hide Scrollbar for Nav */
-        .nav::-webkit-scrollbar {
-          height: 4px;
-        }
-        .nav::-webkit-scrollbar-thumb {
-          background: var(--secondary);
-          border-radius: 4px;
-        }
-
-        .nav button {
-          width: auto;
-          white-space: nowrap;
-          padding: 8px 15px;
-          font-size: 13px;
-        }
-
-        .nav button:hover {
-          padding-left: 15px; /* Disable the desktop hover slide effect */
-        }
-
-        /* Adjust Slides Container */
-        .slides {
-          padding: 20px;
-          overflow: visible; /* Let body handle scrolling */
-          height: auto;
-        }
-
-        .slide {
-          padding-bottom: 40px;
-          min-height: auto !important; /* Override vertical centering height */
-        }
-
-        /* Typography Scaling */
-        h1 {
-          font-size: 36px !important; /* Force override inline styles */
-        }
-        h2 {
-          font-size: 18px;
-        }
-
-        /* Grid Adjustments */
-        .grid {
-          grid-template-columns: 1fr; /* Stack cards */
-        }
-
-        /* App Showcase (Phones) */
-        .app-showcase {
-          gap: 40px;
-          transform: scale(0.9);
-        }
-
-        /* Diagram Images */
-        .diagram-row img {
-          height: auto;
-          max-height: 300px;
-        }
-
-        /* Team Section */
-        .avatars {
-          gap: 20px;
-        }
-
-        /* Conclusion Section */
-        .conclusion-logo {
-          width: 120px;
-          height: 120px;
-          margin-top: 40px;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .sidebar {
-          flex-direction: column;
-          gap: 10px;
-          position: relative; /* Unstick on small screens to save space */
-        }
-        .nav {
-          width: 100%;
-          margin-left: 0;
-          justify-content: flex-start;
-        }
-
-        h1 {
-          font-size: 28px !important;
-        }
-
-        /* Phone 3D Effect Reduced for Mobile */
-        .phone-wrap {
-          transform: perspective(1000px) rotateY(0deg); /* Flatten */
-          margin-bottom: 20px;
-        }
-        .phone-wrap:hover {
-          transform: scale(1.02);
-        }
-
-        .team-section {
-          gap: 20px;
-        }
-
-        /* Fix Center Alignments */
-        .slide > div[style] {
-          min-height: auto !important;
-          padding-top: 40px;
-        }
-      }
-
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
 
       h1 {
         font-size: 48px;
@@ -299,6 +147,7 @@
         background: linear-gradient(90deg, #fff, #aaa);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        line-height: 1.2;
       }
 
       h2 {
@@ -316,6 +165,138 @@
         font-size: 18px;
         line-height: 1.7;
         max-width: 800px;
+      }
+
+      /* =========================================
+         RESPONSIVE MEDIA QUERIES (TABLET & MOBILE)
+         ========================================= */
+      @media (max-width: 900px) {
+        body {
+          overflow: auto; /* Let body scroll on mobile */
+        }
+
+        .container {
+          flex-direction: column;
+          height: auto;
+          min-height: 100vh;
+        }
+
+        /* Top Bar Navigation (App Like) */
+        .sidebar {
+          width: 100%;
+          height: auto;
+          padding: 10px 15px;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          position: sticky;
+          top: 0;
+          background: rgba(15, 17, 21, 0.95);
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          border-right: none;
+          gap: 10px;
+        }
+
+        .logo img {
+          width: 40px;
+          height: 40px;
+          padding: 2px;
+          border-width: 1px;
+        }
+
+        /* Horizontal Scrollable Nav */
+        .nav {
+          display: flex;
+          flex-direction: row;
+          overflow-x: auto;
+          gap: 10px;
+          padding-bottom: 0;
+          margin-left: 0;
+          flex: 1;
+          /* Hide scrollbar visually but keep functionality */
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .nav::-webkit-scrollbar {
+          display: none;
+        }
+
+        .nav button {
+          width: auto;
+          white-space: nowrap;
+          padding: 8px 12px;
+          font-size: 13px;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 20px;
+          border-left: none; /* Remove desktop border style */
+        }
+
+        .nav button.active {
+          background: var(--secondary);
+          color: #000;
+          border-left: none;
+        }
+
+        .nav button:hover {
+          padding-left: 12px; /* Disable slide effect */
+        }
+
+        /* Adjust Slides Container */
+        .slides {
+          padding: 20px;
+          overflow: visible;
+          height: auto;
+        }
+
+        .slide {
+          padding-bottom: 40px;
+          min-height: auto !important;
+        }
+
+        /* Typography Scaling */
+        h1 {
+          font-size: 32px !important;
+        }
+        h2 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 16px;
+        }
+
+        /* Grid to Single Column */
+        .grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        /* Diagram Images */
+        .diagram-row img {
+          height: auto;
+          max-height: 250px;
+        }
+
+        /* Fix Center Alignment container for Cover Slide */
+        .slide > div[style] {
+          min-height: 60vh !important;
+          padding-top: 20px;
+        }
+      }
+
+      /* Specific Mobile Adjustments */
+      @media (max-width: 600px) {
+        .sidebar {
+          flex-wrap: wrap;
+        }
+        .logo {
+          order: 1;
+        }
+        .nav {
+          order: 2;
+          width: 100%;
+          margin-top: 5px;
+        }
       }
 
       /* Cards */
@@ -363,16 +344,25 @@
 
       .phone-wrap {
         text-align: center;
-        /* The 3D Perspective Start */
         transform: perspective(1000px) rotateY(-15deg);
         transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         cursor: pointer;
       }
 
-      /* Hover Effect: Rotates to face front and scales up */
       .phone-wrap:hover {
         transform: perspective(1000px) rotateY(0deg) scale(1.05);
         z-index: 10;
+      }
+
+      /* Disable 3D tilt on mobile for better scrolling */
+      @media (max-width: 768px) {
+        .phone-wrap {
+          transform: none;
+          margin-right: 20px;
+        }
+        .phone-wrap:hover {
+          transform: scale(1.02);
+        }
       }
 
       .phone-frame {
@@ -386,7 +376,15 @@
         position: relative;
       }
 
-      /* Notch */
+      /* Responsive Phone Size */
+      @media (max-width: 600px) {
+        .phone-frame {
+          width: 220px;
+          height: 440px;
+          border-width: 4px;
+        }
+      }
+
       .phone-frame::before {
         content: "";
         position: absolute;
@@ -423,7 +421,7 @@
         letter-spacing: 1px;
       }
 
-      /* ====== DIAGRAMS (ONE PER LINE BOX) ====== */
+      /* ====== DIAGRAMS ====== */
       .diagram-row {
         margin-top: 40px;
         background: #0b0c0f;
@@ -434,7 +432,12 @@
         overflow: hidden;
       }
 
-      /* Decorative glowing line */
+      @media (max-width: 600px) {
+        .diagram-row {
+          padding: 15px;
+        }
+      }
+
       .diagram-row::before {
         content: "";
         position: absolute;
@@ -453,6 +456,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        flex-wrap: wrap; /* Wrap text on mobile */
       }
 
       .diagram-row img {
@@ -464,13 +468,14 @@
         border: 1px solid #222;
       }
 
-      /* ====== TEAM SECTION (Hover Reveal) ====== */
+      /* ====== TEAM SECTION ====== */
       .team-section {
         margin-top: 50px;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 30px;
+        width: 100%;
       }
       .team-group-title {
         font-size: 14px;
@@ -478,11 +483,13 @@
         letter-spacing: 3px;
         color: var(--muted);
         margin-bottom: 15px;
+        text-align: center;
       }
       .avatars {
         display: flex;
         gap: 30px;
         justify-content: center;
+        flex-wrap: wrap; /* Wrap avatars on mobile */
       }
 
       .member-card {
@@ -516,7 +523,20 @@
         opacity: 0;
         transition: 0.3s;
         pointer-events: none;
+        z-index: 10;
       }
+
+      /* Mobile: No Grayscale */
+      @media (max-width: 600px) {
+        .member-photo {
+          filter: grayscale(0%);
+        }
+        .member-card {
+          width: 80px;
+          height: 80px;
+        }
+      }
+
       .member-card:hover {
         transform: scale(1.15);
         z-index: 5;
@@ -546,6 +566,8 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         background: #000;
         height: 280px;
+        width: 100%;
+        max-width: 500px;
       }
       .dash-item img {
         width: 100%;
@@ -580,6 +602,8 @@
         font-size: 14px;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
         padding-top: 20px;
+        flex-wrap: wrap;
+        gap: 10px;
       }
       .conclusion-logo {
         width: 180px;
@@ -589,24 +613,19 @@
         border: 4px solid var(--secondary);
         padding: 15px;
         margin-bottom: 30px;
-        margin-top: 100px;
-
-        /* Glass shadow effect */
+        margin-top: 50px;
         box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2),
-          /* subtle highlight */ 0 8px 30px rgba(0, 0, 0, 0.15),
-          /* soft shadow */ 0 0 40px rgba(255, 255, 255, 0.1); /* soft glow */
-
-        backdrop-filter: blur(
-          8px
-        ); /* optional, if the logo is over a background */
+          0 8px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
         animation: floatLogo 2s ease-in-out infinite alternate;
         transition: box-shadow 0.3s ease;
       }
 
-      /* Optional hover effect for more glass-like interaction */
-      .conclusion-logo:hover {
-        box-shadow: 0 6px 25px rgba(255, 255, 255, 0.3),
-          0 10px 40px rgba(0, 0, 0, 0.2), 0 0 50px rgba(255, 255, 255, 0.15);
+      @media (max-width: 600px) {
+        .conclusion-logo {
+          width: 140px;
+          height: 140px;
+        }
       }
 
       @keyframes floatLogo {
@@ -617,60 +636,15 @@
           transform: translateY(-15px);
         }
       }
-      /* ===== FIX PHONE NOTCH (MOBILE SCREENS READABILITY) ===== */
 
-      /* Replace big notch with a slim speaker */
-      /* ===== GLASS NOTCH (NON-BLOCKING) ===== */
-      /* ===== FLOATING GLASS NOTCH (OVERLAY ONLY) ===== */
-      /* ===== NOTCH BORDER ONLY ===== */
-      .phone-frame::before {
-        content: "";
-        position: absolute;
-        top: 12px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90px;
-        height: 26px;
-        border-radius: 18px;
-        background: #000;
-        z-index: 20;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-      }
-      .phone-wrap:hover .phone-frame::before {
-        opacity: 0;
-      }
-
-      /* Push content down so nothing hides */
-      .phone-screen {
-        width: 100%;
-        height: 100%;
-        background: #1a1a1a;
-
-        /* FULL SCREEN CONTENT */
-        padding: 0;
-        margin: 0;
-
-        display: flex;
-        align-items: stretch;
-        justify-content: stretch;
-
-        position: relative;
-      }
-
-      /* Ensure images always fit fully */
-      .phone-screen img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain; /* shows full screen */
-        display: block;
-      }
+      /* Horizontal Scroll for Phones on Mobile */
       .carousel {
         display: flex;
-        gap: 50px;
+        gap: 30px;
         overflow-x: auto;
-        padding: 40px 0;
+        padding: 40px 20px;
         scroll-snap-type: x mandatory;
+        width: 100%;
       }
 
       .carousel::-webkit-scrollbar {
@@ -686,6 +660,9 @@
         scroll-snap-align: center;
       }
 
+      /* ==================================================
+          REDESIGNED "CONNECT CARD" - MOBILE RESPONSIVE
+       ================================================== */
       .thank-you-attendance {
         margin-top: 60px;
         width: 100%;
@@ -696,7 +673,7 @@
         transition: opacity 0.8s ease, transform 0.8s ease;
         position: relative;
         z-index: 100;
-        padding-bottom: 120px; /* Space for hologram on mobile */
+        padding-bottom: 150px; /* Space for hologram on mobile */
       }
 
       .thank-you-attendance.show {
@@ -741,7 +718,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        flex-wrap: wrap; /* Prevent icon break */
+        flex-wrap: wrap;
       }
 
       .connect-text h3 i {
@@ -780,7 +757,7 @@
         box-shadow: 0 0 15px rgba(38, 198, 218, 0.4);
       }
 
-      /* === HOLOGRAPHIC LOGO TRIGGER ZONE === */
+      /* === TRIGGER ZONE === */
       .qr-trigger-zone {
         position: relative;
         width: 90px;
@@ -830,14 +807,14 @@
         border-color: var(--secondary);
       }
 
-      /* === THE HOLOGRAM PROJECTION POP-UP === */
+      /* === THE HOLOGRAM PROJECTION === */
       .qr-hologram {
         position: absolute;
-        bottom: 110%; /* Default Desktop Position */
+        bottom: 110%; /* Desktop: Above */
         left: 50%;
         transform: translateX(-50%) translateY(20px) scale(0.8);
         width: 220px;
-        background: rgba(10, 10, 15, 0.9);
+        background: rgba(10, 10, 15, 0.95);
         border: 1px solid var(--secondary);
         border-radius: 16px;
         padding: 15px;
@@ -866,7 +843,7 @@
         border-color: var(--secondary) transparent transparent transparent;
       }
 
-      /* Show hologram on Desktop Hover OR Mobile Active Class */
+      /* Activation Logic */
       .connect-card:hover .qr-hologram,
       .connect-card.mobile-active .qr-hologram {
         opacity: 1;
@@ -902,7 +879,7 @@
         }
       }
 
-      /* Mobile Specific Layout for Connect Card */
+      /* === MOBILE ADJUSTMENTS FOR CARD === */
       @media (max-width: 650px) {
         .thank-you-attendance {
           padding-bottom: 0;
@@ -920,14 +897,14 @@
           justify-content: center;
         }
 
-        /* Adjust hologram position for mobile stack */
+        /* On mobile, project DOWNWARDS (so it doesn't get cut off by nav) */
         .qr-hologram {
           bottom: unset;
-          top: 110%; /* Project DOWNWARDS or cover on mobile */
+          top: 110%;
           transform: translateX(-50%) translateY(-20px) scale(0.8);
         }
 
-        /* On mobile, flip the arrow to point up */
+        /* Flip the arrow for mobile */
         .qr-hologram::after {
           bottom: unset;
           top: -8px;
@@ -1837,9 +1814,24 @@
       );
 
       observer.observe(thankYou);
-      const qr = document.querySelector(".qr-attendance");
 
-      if (qr) observer.observe(qr);
+      // ===== MOBILE DETECTION FOR QR INTERACTION =====
+
+      // Check if user is on mobile/tablet to change "Hover" text to "Tap"
+      if (window.innerWidth <= 900 || "ontouchstart" in window) {
+        const dtText = document.querySelector(".desktop-text");
+        const mobText = document.querySelector(".mobile-text");
+        if (dtText) dtText.style.display = "none";
+        if (mobText) mobText.style.display = "inline";
+      }
+
+      function toggleHologram() {
+        const card = document.getElementById("qrCard");
+        // Only enable toggle on smaller screens where hover doesn't work
+        if (window.innerWidth <= 900) {
+          card.classList.toggle("mobile-active");
+        }
+      }
     </script>
   </body>
 </html>
