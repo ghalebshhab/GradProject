@@ -617,6 +617,74 @@
           transform: translateY(-15px);
         }
       }
+      /* ===== FIX PHONE NOTCH (MOBILE SCREENS READABILITY) ===== */
+
+      /* Replace big notch with a slim speaker */
+      /* ===== GLASS NOTCH (NON-BLOCKING) ===== */
+      /* ===== FLOATING GLASS NOTCH (OVERLAY ONLY) ===== */
+      /* ===== NOTCH BORDER ONLY ===== */
+      .phone-frame::before {
+        content: "";
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90px;
+        height: 26px;
+        border-radius: 18px;
+        background: #000;
+        z-index: 20;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+      .phone-wrap:hover .phone-frame::before {
+        opacity: 0;
+      }
+
+      /* Push content down so nothing hides */
+      .phone-screen {
+        width: 100%;
+        height: 100%;
+        background: #1a1a1a;
+
+        /* FULL SCREEN CONTENT */
+        padding: 0;
+        margin: 0;
+
+        display: flex;
+        align-items: stretch;
+        justify-content: stretch;
+
+        position: relative;
+      }
+
+      /* Ensure images always fit fully */
+      .phone-screen img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* shows full screen */
+        display: block;
+      }
+      .carousel {
+        display: flex;
+        gap: 50px;
+        overflow-x: auto;
+        padding: 40px 0;
+        scroll-snap-type: x mandatory;
+      }
+
+      .carousel::-webkit-scrollbar {
+        height: 6px;
+      }
+      .carousel::-webkit-scrollbar-thumb {
+        background: var(--secondary);
+        border-radius: 4px;
+      }
+
+      .phone-wrap {
+        flex: 0 0 auto;
+        scroll-snap-align: center;
+      }
     </style>
   </head>
 
@@ -644,13 +712,13 @@
             <i class="fa fa-sitemap"></i> Architecture
           </button>
           <button onclick="showSlide(5)">
-            <i class="fa fa-mobile"></i> App Screens
+            <i class="fa fa-mobile"></i> Diagrams
           </button>
           <button onclick="showSlide(6)">
-            <i class="fa fa-gauge"></i> Dashboard
+            <i class="fa fa-gauge"></i> App Screens
           </button>
           <button onclick="showSlide(7)">
-            <i class="fa fa-diagram-project"></i> Diagrams
+            <i class="fa fa-diagram-project"></i> Dashboard
           </button>
           <button onclick="showSlide(8)">
             <i class="fa fa-rocket"></i> Future
@@ -681,7 +749,7 @@
                 <div class="avatars">
                   <div class="member-card">
                     <img
-                      src="https://via.placeholder.com/150"
+                      src="./Pictures/Dr.jpg"
                       class="member-photo"
                       alt="Dr. Zarour"
                     />
@@ -693,27 +761,43 @@
                 <div class="team-group-title">Done By</div>
                 <div class="avatars">
                   <div class="member-card">
-                    <img src="./Me.JPEG" class="member-photo" alt="Ghaleb" />
+                    <img
+                      src="./Pictures/Me.JPEG"
+                      class="member-photo"
+                      alt="Ghaleb"
+                    />
                     <div class="member-info">Ghaleb Shhab</div>
                   </div>
                   <div class="member-card">
-                    <img src="./Me.JPEG" class="member-photo" alt="Eyad" />
+                    <img
+                      src="./Pictures/Eyad.jpg"
+                      class="member-photo"
+                      alt="Eyad"
+                    />
                     <div class="member-info">Eyad Abu Fares</div>
                   </div>
                   <div class="member-card">
-                    <img src="./Me.JPEG" class="member-photo" alt="Zyad" />
+                    <img
+                      src="./Pictures/Zoz.jpg"
+                      class="member-photo"
+                      alt="Zyad"
+                    />
                     <div class="member-info">Zyad Qafisheh</div>
                   </div>
                   <div class="member-card">
                     <img
-                      src="./Me.JPEG"
+                      src="./Pictures/Abd.jpg"
                       class="member-photo"
                       alt="Abdelqader"
                     />
                     <div class="member-info">Abdelqader Froukh</div>
                   </div>
                   <div class="member-card">
-                    <img src="./Me.JPEG" class="member-photo" alt="Mousaab" />
+                    <img
+                      src="./Pictures/Mous.jpg"
+                      class="member-photo"
+                      alt="Mousaab"
+                    />
                     <div class="member-info">Mousaab Makahleh</div>
                   </div>
                 </div>
@@ -721,181 +805,710 @@
             </div>
           </div>
         </section>
-
         <section class="slide">
           <h1>Project Overview</h1>
+          <h2>What is JoMap?</h2>
+
+          <!-- ===== OVERVIEW ===== -->
+          <p>
+            JoMap is a smart, location-based community platform that connects
+            people with real places, live events, and trusted local activities
+            through an interactive map experience. It transforms maps from
+            static navigation tools into social, informative, and
+            community-driven spaces.
+          </p>
+
+          <!-- ===== PROBLEM STATEMENT ===== -->
+          <h2>Problem Statement</h2>
+          <p>
+            People often struggle to discover reliable places, real-time events,
+            and local activities around them. Existing map and social platforms
+            either lack community interaction, show outdated information, or
+            fail to provide localized, trustworthy content. This creates a gap
+            between users and the real-world experiences happening near them.
+          </p>
+
+          <!-- ===== FEATURES ===== -->
+          <h2>Core Features</h2>
+
           <div class="grid">
             <div class="card">
               <i class="fa fa-map-location-dot"></i>
-              <h3>Map Discovery</h3>
-              <p>Explore places and events visually.</p>
+              <h3>Smart Map Discovery</h3>
+              <p>
+                Discover verified places, activities, and events visually
+                through an interactive, real-time map interface.
+              </p>
             </div>
+
             <div class="card">
               <i class="fa fa-users"></i>
-              <h3>Community</h3>
-              <p>Interact, post, and chat in real time.</p>
+              <h3>Community Interaction</h3>
+              <p>
+                Engage with nearby users by posting updates, commenting, and
+                sharing experiences within your local area.
+              </p>
             </div>
+
             <div class="card">
-              <i class="fa fa-calendar"></i>
-              <h3>Events</h3>
-              <p>Verified local events.</p>
+              <i class="fa fa-calendar-check"></i>
+              <h3>Live & Upcoming Events</h3>
+              <p>
+                Explore ongoing and upcoming events based on your location,
+                time, and personal interests.
+              </p>
+            </div>
+
+            <div class="card">
+              <i class="fa fa-star"></i>
+              <h3>Smart Recommendations</h3>
+              <p>
+                Receive personalized place and event suggestions tailored to
+                your preferences and activity history.
+              </p>
+            </div>
+
+            <div class="card">
+              <i class="fa fa-comments"></i>
+              <h3>Chat & Messaging</h3>
+              <p>
+                Communicate easily with friends, business owners, and local
+                users through direct and group chats.
+              </p>
             </div>
           </div>
         </section>
 
         <section class="slide">
           <h1>Problem Statement</h1>
+          <h2>Why JoMap is Needed</h2>
+
           <div
             class="grid"
-            style="grid-template-columns: 1fr; max-width: 600px"
+            style="grid-template-columns: 1fr; max-width: 800px"
           >
             <div class="card" style="border-left: 4px solid #ef5350">
-              <h3 style="color: #ef5350">Fake Locations</h3>
-              <p>Lack of verification leads to wasted time.</p>
+              <h3 style="color: #ef5350">Unverified Locations</h3>
+              <p>
+                Many platforms allow users to post locations without validation,
+                resulting in fake or misleading information.
+              </p>
             </div>
+
             <div class="card" style="border-left: 4px solid #ef5350">
-              <h3 style="color: #ef5350">Poor Discovery</h3>
-              <p>Hard to find "what's happening now".</p>
+              <h3 style="color: #ef5350">Poor Local Discovery</h3>
+              <p>
+                Users struggle to find nearby events or activities happening
+                right now.
+              </p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #ef5350">
+              <h3 style="color: #ef5350">Lack of Moderation</h3>
+              <p>
+                Existing systems lack proper reporting and administrative
+                control.
+              </p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #ef5350">
+              <h3 style="color: #ef5350">No Direct Chat</h3>
+              <p>
+                Users cannot communicate directly with others, limiting
+                engagement and community building.
+              </p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #ef5350">
+              <h3 style="color: #ef5350">Missed Events</h3>
+              <p>
+                Users often miss important or nearby events due to poor
+                notifications and event visibility.
+              </p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #ef5350">
+              <h3 style="color: #ef5350">Fragmented Experience</h3>
+              <p>
+                Users have to switch between multiple apps for maps, social
+                interaction, and event updates.
+              </p>
             </div>
           </div>
         </section>
-
         <section class="slide">
           <h1>JoMap Solution</h1>
+          <h2>How We Solve the Problems</h2>
+
           <div class="grid">
-            <div class="card" style="border-left: 4px solid var(--success)">
-              <i class="fa fa-check" style="color: var(--success)"></i>
-              <h3>Map Interface</h3>
+            <div class="card">
+              <i class="fa fa-map"></i>
+              <h3>Verified Locations</h3>
+              <p>
+                Locations and events are reviewed and moderated before becoming
+                public, ensuring users access only trustworthy information.
+              </p>
             </div>
-            <div class="card" style="border-left: 4px solid var(--success)">
-              <i class="fa fa-shield" style="color: var(--success)"></i>
+
+            <div class="card">
+              <i class="fa fa-shield"></i>
               <h3>Admin Moderation</h3>
+              <p>
+                Admin dashboard allows monitoring users, posts, events, and
+                reports, keeping the community safe and reliable.
+              </p>
             </div>
-            <div class="card" style="border-left: 4px solid var(--success)">
-              <i class="fa fa-flag" style="color: var(--success)"></i>
+
+            <div class="card">
+              <i class="fa fa-flag"></i>
               <h3>Reporting System</h3>
+              <p>
+                Users can report fake or inappropriate content directly from the
+                app, helping maintain content quality.
+              </p>
+            </div>
+
+            <div class="card">
+              <i class="fa fa-comments"></i>
+              <h3>Direct Chat</h3>
+              <p>
+                Users can communicate with each other privately or in groups,
+                enabling better community interaction.
+              </p>
+            </div>
+
+            <div class="card">
+              <i class="fa fa-bell"></i>
+              <h3>Event Notifications</h3>
+              <p>
+                Receive timely alerts about nearby and upcoming events based on
+                interests and location.
+              </p>
+            </div>
+
+            <div class="card">
+              <i class="fa fa-layer-group"></i>
+              <h3>All-in-One Experience</h3>
+              <p>
+                JoMap combines maps, community posts, chats, and events into a
+                seamless platform—no need to switch between apps.
+              </p>
             </div>
           </div>
         </section>
-
         <section class="slide">
           <h1>System Architecture</h1>
-          <div class="diagram-row">
-            <h3>Process View Diagram</h3>
-            <img src="./Process for (User) (2).png" alt="System Architecture" />
+          <h2>High-Level View</h2>
+
+          <p>
+            JoMap follows a client-server architecture where mobile users
+            interact with backend services through secure APIs, while
+            administrators manage data through a web dashboard. The system
+            ensures scalability, security, and real-time interaction.
+          </p>
+
+          <div
+            class="grid"
+            style="grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px"
+          >
+            <div class="card">
+              <i class="fa fa-mobile"></i>
+              <h3>Mobile Clients</h3>
+              <p>
+                Android and iOS applications allow users to explore locations,
+                interact with the community, create posts, and view live events
+                through an interactive map interface.
+              </p>
+            </div>
+
+            <div class="card">
+              <i class="fa fa-desktop"></i>
+              <h3>Admin Dashboard</h3>
+              <p>
+                A web-based dashboard enables administrators to manage users,
+                verify locations, review reports, and moderate content
+                efficiently.
+              </p>
+            </div>
+
+            <div class="card">
+              <i class="fa fa-server"></i>
+              <h3>Backend Services</h3>
+              <p>
+                Backend services handle business logic, authentication, data
+                processing, and communication between clients and the database
+                using secure RESTful APIs.
+              </p>
+            </div>
+
+            <div class="card">
+              <i class="fa fa-lock"></i>
+              <h3>Security & Privacy</h3>
+              <p>
+                The system uses secure authentication, encrypted communication,
+                and role-based access control to protect user data and platform
+                integrity.
+              </p>
+            </div>
+          </div>
+
+          <!-- ===== COMPONENT DIAGRAM ===== -->
+          <div class="diagram-row" style="margin-top: 40px">
+            <h3><i class="fa fa-cubes"></i> Component Diagram</h3>
+            <p>
+              The component diagram illustrates the internal structure of the
+              JoMap system, showing how major software components interact with
+              each other. It highlights the separation between the mobile
+              application, backend services, database, and admin dashboard.
+            </p>
+
+            <a
+              href="./Pictures/Logical View (Component Diagram).png"
+              target="_blank"
+            >
+              <img
+                src="./Pictures/Logical View (Component Diagram).png"
+                alt="JoMap Component Diagram"
+              />
+            </a>
+          </div>
+
+          <!-- ===== PHYSICAL (DEPLOYMENT) DIAGRAM ===== -->
+          <div class="diagram-row" style="margin-top: 40px">
+            <h3><i class="fa fa-server"></i> Physical (Deployment) Diagram</h3>
+            <p>
+              The physical diagram represents the deployment environment of
+              JoMap. It shows how the mobile app, web dashboard, backend server,
+              and database are distributed across physical or cloud-based
+              infrastructure and connected through secure networks.
+            </p>
+
+            <a
+              href="./Pictures/Physical View (Deployment Diagram).png"
+              target="_blank"
+            >
+              <img
+                src="./Pictures/Physical View (Deployment Diagram).png"
+                alt="JoMap Physical Deployment Diagram"
+              />
+            </a>
+          </div>
+
+          <!-- ===== DATA FLOW ===== -->
+          <div class="diagram-row" style="margin-top: 40px">
+            <h3><i class="fa fa-network-wired"></i> Data Flow Overview</h3>
+            <p>
+              User requests are sent to the backend through secure APIs. The
+              backend processes the request, interacts with the database, and
+              returns the appropriate response in real time. Notifications and
+              updates are delivered instantly to connected users.
+            </p>
+
+            <a href="./Process for (User) (2).png" target="_blank">
+              <img
+                src="./Process for (User) (2).png"
+                alt="Process View Diagram"
+              />
+            </a>
           </div>
         </section>
 
         <section class="slide">
-          <h1>Mobile App Screens</h1>
-          <div class="app-showcase">
+          <h1>Technical Diagrams</h1>
+          <h2>System Design</h2>
+
+          <div class="diagram-row">
+            <h3>Use Case Diagram</h3>
+            <a href="./Pictures/Use Case Diagram.png" target="_blank">
+              <img src="./Pictures/Use Case Diagram.png" />
+            </a>
+          </div>
+
+          <div class="diagram-row">
+            <h3>Sequence Diagram</h3>
+            <a href="./Pictures/2. Create Location List.png" target="_blank">
+              <img src="./Pictures/2. Create Location List.png" />
+            </a>
+          </div>
+          <div class="diagram-row">
+            <h3>Sequence Diagram</h3>
+            <a
+              href="./Pictures/5. Registration for Activity.png"
+              target="_blank"
+            >
+              <img src="./Pictures/5. Registration for Activity.png" />
+            </a>
+          </div>
+
+          <div class="diagram-row">
+            <h3>Location State</h3>
+            <a
+              href="./Pictures/1. Location Listing Lifecycle.png"
+              target="_blank"
+            >
+              <img src="./Pictures/1. Location Listing Lifecycle.png" />
+            </a>
+          </div>
+          <div class="diagram-row">
+            <h3>Comment State</h3>
+            <a href="./Pictures/2. Comment Lifecycle.png" target="_blank">
+              <img src="./Pictures/2. Comment Lifecycle.png" />
+            </a>
+          </div>
+        </section>
+        <section class="slide">
+          <h1>Mobile Application</h1>
+          <h2>User Experience</h2>
+
+          <p>
+            The JoMap mobile app is designed to be intuitive, fast, and visually
+            centered around map interaction.
+          </p>
+
+          <!-- ===== HORIZONTAL SCROLL SHOWCASE ===== -->
+          <div class="carousel">
+            <!-- ===== AUTHENTICATION ===== -->
             <div class="phone-wrap">
               <div class="phone-frame">
                 <div class="phone-screen">
-                  <span style="color: #555">[Map UI Image]</span>
+                  <img
+                    src="./9. Prototype/1. Onboarding & Authentication/2. LoginScreen.jpg"
+                    alt="Login Screen"
+                  />
                 </div>
               </div>
-              <div class="phone-label">Map Interface</div>
+              <div class="phone-label">Login</div>
+            </div>
+
+            <!-- ===== COMMUNITY ===== -->
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img
+                    src="./9. Prototype/2. Community Module/1. Home.jpg"
+                    alt="Home Screen"
+                  />
+                </div>
+              </div>
+              <div class="phone-label">Home</div>
             </div>
 
             <div class="phone-wrap">
               <div class="phone-frame">
                 <div class="phone-screen">
-                  <span style="color: #555">[Feed UI Image]</span>
+                  <img
+                    src="./9. Prototype/2. Community Module/3. Post 2.jpg"
+                    alt="Post Screen"
+                  />
                 </div>
               </div>
-              <div class="phone-label">Community Feed</div>
+              <div class="phone-label">Post Page</div>
+            </div>
+
+            <!-- ===== CHAT ===== -->
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img
+                    src="./9. Prototype/3. Chat Module/Chat Screen.jpg"
+                    alt="Chat Screen"
+                  />
+                </div>
+              </div>
+              <div class="phone-label">Chat</div>
+            </div>
+
+            <!-- ===== MAP & LOCATIONS ===== -->
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img
+                    src="./9. Prototype/4. Locations Module/1. Map Screen.jpg"
+                    alt="Map Screen"
+                  />
+                </div>
+              </div>
+              <div class="phone-label">Map</div>
             </div>
 
             <div class="phone-wrap">
               <div class="phone-frame">
                 <div class="phone-screen">
-                  <span style="color: #555">[Chat UI Image]</span>
+                  <img
+                    src="./9. Prototype/4. Locations Module/2. Governorate Screen 1.jpg"
+                    alt="Governorate Screen"
+                  />
                 </div>
               </div>
-              <div class="phone-label">Chat System</div>
+              <div class="phone-label">Governorate</div>
             </div>
+
             <div class="phone-wrap">
               <div class="phone-frame">
                 <div class="phone-screen">
-                  <span style="color: #555">[Event UI Image]</span>
+                  <img
+                    src="./9. Prototype/4. Locations Module/5. Search Screen 1.jpg"
+                    alt="Search Screen"
+                  />
                 </div>
               </div>
-              <div class="phone-label">Event Screen</div>
+              <div class="phone-label">Search</div>
             </div>
+
             <div class="phone-wrap">
               <div class="phone-frame">
                 <div class="phone-screen">
-                  <span style="color: #555">[Post UI Image]</span>
+                  <img
+                    src="./9. Prototype/4. Locations Module/7. Location Profile 1.jpg"
+                    alt="Location Profile"
+                  />
                 </div>
               </div>
-              <div class="phone-label">Post Screen</div>
+              <div class="phone-label">Location Profile</div>
+            </div>
+
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img
+                    src="./9. Prototype/4. Locations Module/9. Create Location List.jpg"
+                    alt="Location List"
+                  />
+                </div>
+              </div>
+              <div class="phone-label">Location List</div>
+            </div>
+
+            <!-- ===== BUSINESS OWNER ===== -->
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img
+                    src="./9. Prototype/5. Business Owner Flow/1. My Location - نظرة عامة.jpg"
+                    alt="Business Overview"
+                  />
+                </div>
+              </div>
+              <div class="phone-label">Business Overview</div>
+            </div>
+
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img
+                    src="./9. Prototype/5. Business Owner Flow/4. My Location - التقييمات.jpg"
+                    alt="Business Reviews"
+                  />
+                </div>
+              </div>
+              <div class="phone-label">Business Reviews</div>
+            </div>
+
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img
+                    src="./9. Prototype/5. Business Owner Flow/5. Activity Profile 1.jpg"
+                    alt="Activity Profile"
+                  />
+                </div>
+              </div>
+              <div class="phone-label">Activity Profile</div>
+            </div>
+
+            <!-- ===== PROFILE ===== -->
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img
+                    src="./9. Prototype/6. Profile/1. My Profile.jpg"
+                    alt="My Profile"
+                  />
+                </div>
+              </div>
+              <div class="phone-label">My Profile</div>
+            </div>
+
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img
+                    src="./9. Prototype/6. Profile/2. User Profile.jpg"
+                    alt="User Profile"
+                  />
+                </div>
+              </div>
+              <div class="phone-label">User Profile</div>
             </div>
           </div>
         </section>
 
         <section class="slide">
           <h1>Admin Dashboard</h1>
-          <p>Centralized control for analytics and moderation.</p>
+          <h2>Control & Analytics</h2>
+
+          <p>
+            The admin dashboard provides full control over users, events,
+            reports, and system analytics in real time.
+          </p>
           <div class="dashboard-gallery">
             <div class="dash-item">
-              <img src="./Pictures/Dashboard-1.png" alt="Analytics" />
+              <a href="./Pictures/Dashboard-1.png" target="_blank">
+                <img src="./Pictures/Dashboard-2.png" />
+              </a>
               <div class="caption">Real-Time Analytics</div>
             </div>
             <div class="dash-item">
-              <img src="./Pictures/Users.png" alt="Users" />
+              <a href="./Pictures/Users.png" target="_blank">
+                <img src="./Pictures/Users.png" alt="Users" />
+              </a>
               <div class="caption">User Management</div>
             </div>
             <div class="dash-item">
-              <img src="./Pictures/Events.png" alt="Events" />
+              <a href="./Pictures/Events.png" target="_blank">
+                <img src="./Pictures/Events.png" alt="Events" />
+              </a>
               <div class="caption">Event Control</div>
             </div>
             <div class="dash-item">
-              <img src="./Pictures/Reports.png" alt="Reports" />
+              <a href="./Pictures/Reports.png" target="_blank">
+                <img src="./Pictures/Reports.png" alt="Reports" />
+              </a>
               <div class="caption">Reports System</div>
             </div>
           </div>
         </section>
 
         <section class="slide">
-          <h1>Technical Diagrams</h1>
-
-          <div class="diagram-row">
-            <h3><i class="fa fa-diagram-project"></i> Use Case Diagram</h3>
-            <img src="./Usecase - Navy Blue.drawio.png" alt="Use Case" />
-          </div>
-
-          <div class="diagram-row">
-            <h3><i class="fa fa-arrow-down-long"></i> Sequence Diagram</h3>
-            <img src="./addLocation.drawio.png" alt="Sequence" />
-          </div>
-          <div class="diagram-row">
-            <h3><i class="fa fa-arrow-down-long"></i> Sequence Diagram</h3>
-            <img src="./Screenshot 2025-12-21 211418.png" alt="Sequence" />
-          </div>
-
-          <div class="diagram-row">
-            <h3><i class="fa fa-rotate"></i> Process Flow</h3>
-            <img src="./Process for (User) (2).png" alt="Process" />
-          </div>
-        </section>
-
-        <section class="slide">
           <h1>Future Enhancements</h1>
-          <div class="grid">
-            <div class="card">
+          <h2>What’s Next</h2>
+
+          <p
+            style="
+              max-width: 800px;
+              margin-top: 10px;
+              color: var(--muted);
+              font-size: 18px;
+            "
+          >
+            JoMap is evolving to provide smarter, safer, and more engaging
+            experiences for users. Upcoming features focus on AI,
+            personalization, and interactive community insights.
+          </p>
+
+          <div class="grid" style="margin-top: 40px">
+            <div class="card" style="position: relative; overflow: hidden">
               <i class="fa fa-robot"></i>
               <h3>AI Moderation</h3>
+              <p>
+                Automatic detection of fake or harmful content for safer
+                communities.
+              </p>
+              <span class="card-tag">Security</span>
             </div>
-            <div class="card">
+
+            <div class="card" style="position: relative; overflow: hidden">
               <i class="fa fa-wand-magic-sparkles"></i>
-              <h3>Smart Recs</h3>
+              <h3>Smart Recommendations</h3>
+              <p>
+                Personalized events and content based on your interests and
+                behavior.
+              </p>
+              <span class="card-tag">Personalization</span>
             </div>
-            <div class="card">
+
+            <div class="card" style="position: relative; overflow: hidden">
               <i class="fa fa-chart-pie"></i>
               <h3>Heatmaps</h3>
+              <p>
+                Visual insights highlighting popular locations and activity
+                hotspots.
+              </p>
+              <span class="card-tag">Analytics</span>
+            </div>
+
+            <div class="card" style="position: relative; overflow: hidden">
+              <i class="fa fa-comments"></i>
+              <h3>Enhanced Chat Features</h3>
+              <p>
+                Real-time group chats, location-based discussion channels, and
+                direct messaging.
+              </p>
+              <span class="card-tag">Community</span>
+            </div>
+
+            <div class="card" style="position: relative; overflow: hidden">
+              <i class="fa fa-calendar-days"></i>
+              <h3>Event Automation</h3>
+              <p>
+                Automatic event suggestions, reminders, and RSVP tracking for
+                users.
+              </p>
+              <span class="card-tag">Productivity</span>
+            </div>
+
+            <div class="card" style="position: relative; overflow: hidden">
+              <i class="fa fa-globe"></i>
+              <h3>Global Expansion</h3>
+              <p>
+                Enable multiple cities, languages, and cultural event
+                integration.
+              </p>
+              <span class="card-tag">Growth</span>
             </div>
           </div>
+
+          <style>
+            /* Card tags */
+            .card-tag {
+              position: absolute;
+              top: 12px;
+              right: 12px;
+              background: var(--secondary);
+              color: white;
+              font-size: 12px;
+              font-weight: 600;
+              padding: 4px 8px;
+              border-radius: 12px;
+              opacity: 0.9;
+              transition: transform 0.3s, opacity 0.3s;
+            }
+
+            /* Card hover effect */
+            .card:hover {
+              transform: translateY(-8px) scale(1.03);
+              box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            }
+
+            .card:hover .card-tag {
+              transform: translateY(-5px);
+              opacity: 1;
+            }
+
+            /* Fade-in animation for cards */
+            .card {
+              animation: fadeUp 0.6s ease forwards;
+            }
+
+            .card:nth-child(1) {
+              animation-delay: 0.1s;
+            }
+            .card:nth-child(2) {
+              animation-delay: 0.2s;
+            }
+            .card:nth-child(3) {
+              animation-delay: 0.3s;
+            }
+            .card:nth-child(4) {
+              animation-delay: 0.4s;
+            }
+            .card:nth-child(5) {
+              animation-delay: 0.5s;
+            }
+            .card:nth-child(6) {
+              animation-delay: 0.6s;
+            }
+          </style>
         </section>
 
         <section class="slide">

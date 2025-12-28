@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JoMap – Official Invitation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-dark: #09090b;
+        --card-bg: rgba(20, 20, 23, 0.7);
+        --text: #ffffff;
+        --muted: #9ca3af;
+        --border: rgba(255, 255, 255, 0.12);
+        --accent-cyan: #06b6d4; /* cyan accent */
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        height: 100vh;
+        width: 100%;
+        background-color: var(--bg-dark);
+        color: var(--text);
+        font-family: "Outfit", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        padding: 20px;
+      }
+
+      .ambient-light {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(6, 182, 212, 0.2) 0%,
+          rgba(255, 255, 255, 0) 70%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        animation: pulseGlow 6s ease-in-out infinite alternate;
+      }
+
+      .invite-card {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 380px;
+        background: var(--card-bg);
+        backdrop-filter: blur(24px);
+        border-radius: 32px;
+        border: 1px solid var(--border);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+          0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        padding: 40px 30px;
+        text-align: center;
+      }
+
+      .invite-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 35%;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent-cyan),
+          transparent
+        );
+        border-radius: 0 0 10px 10px;
+      }
+
+      .tagline {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--accent-cyan);
+        margin-bottom: 18px;
+        border: 1px solid rgba(6, 182, 212, 0.3);
+        padding: 4px 12px;
+        border-radius: 20px;
+        display: inline-block;
+        background: rgba(6, 182, 212, 0.08);
+      }
+
+      .logo-container {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 14px auto;
+        background: #000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid rgba(6, 182, 212, 0.4);
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+      }
+
+      .logo-container img {
+        width: 80%;
+        height: 80%;
+        object-fit: contain;
+        border-radius: 50%;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 40px;
+        font-weight: 800;
+        letter-spacing: -1px;
+        background: linear-gradient(
+          to bottom right,
+          #ffffff,
+          var(--accent-cyan)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .invite-msg {
+        font-size: 15px;
+        color: #e5e7eb;
+        margin-top: 10px;
+        font-weight: 300;
+        line-height: 1.5;
+      }
+
+      .invite-msg span {
+        color: var(--accent-cyan);
+        font-weight: 500;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 26px;
+      }
+
+      .info-item {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 14px;
+        border-radius: 16px;
+        text-align: left;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .info-item.full {
+        grid-column: span 2;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .info-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        color: var(--muted);
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+        display: block;
+      }
+
+      .info-val {
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .icon-box {
+        width: 32px;
+        height: 32px;
+        background: rgba(6, 182, 212, 0.15);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-cyan);
+        font-size: 14px;
+      }
+
+      .team-area {
+        margin-top: 30px;
+        border-top: 1px dashed var(--border);
+        padding-top: 18px;
+      }
+
+      .team-label {
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 14px;
+        display: block;
+      }
+
+      .team-row {
+        display: flex;
+        justify-content: center;
+        margin-left: 10px;
+      }
+
+      .avatar {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 3px solid #18181b;
+        margin-left: -12px;
+        transition: all 0.2s;
+      }
+
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .avatar:hover {
+        transform: translateY(-5px) scale(1.1);
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 15px var(--accent-cyan);
+      }
+
+      .footer {
+        margin-top: 26px;
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.5px;
+      }
+
+      @keyframes pulseGlow {
+        from {
+          opacity: 0.5;
+          transform: translate(-50%, -50%) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.05);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="ambient-light"></div>
+
+    <div class="invite-card">
+      <div class="tagline">You Are Invited</div>
+
+      <div class="logo-container">
+        <img src="./OurLogo.png" alt="JoMap Logo" />
+      </div>
+
+      <h1>JoMap</h1>
+
+      <div class="invite-msg">
+        <span>Join us</span> as we unveil our vision.<br />
+        A journey begins — <span>you are part of it</span>.
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">Date</span>
+          <div class="info-val">29 DEC</div>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">Time</span>
+          <div class="info-val">11:40 AM</div>
+        </div>
+
+        <div class="info-item full">
+          <div class="icon-box">
+            <i class="fa fa-location-dot"></i>
+          </div>
+          <div>
+            <span class="info-label">Location</span>
+            <div class="info-val">Hall IT 303</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-area">
+        <span class="team-label">Crafted by the Team</span>
+        <div class="team-row">
+          <div class="avatar"><img src="./Pictures/Me-3.JPEG" /></div>
+          <div class="avatar"><img src="./Pictures/Eyad.jpg" /></div>
+          <div class="avatar"><img src="./Pictures/Zoz.jpg" /></div>
+          <div class="avatar"><img src="./Pictures/Abd.jpg" /></div>
+          <div class="avatar"><img src="./Pictures/Mous.jpg" /></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Faculty of Information Technology • Graduation Project I
+      </div>
+    </div>
+  </body>
+</html>
